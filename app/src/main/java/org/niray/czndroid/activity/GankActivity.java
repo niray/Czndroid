@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import org.niray.czndroid.DrakeetFactory;
 import org.niray.czndroid.GankApi;
+import org.niray.czndroid.bean.LineListData;
 import org.niray.czndroid.bean.Meizhi;
 import org.niray.czndroid.bean.MeizhiData;
 import org.niray.czndroid.bean.VideoData;
@@ -46,7 +47,24 @@ public class GankActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData(true);
+//        loadData(true);
+        loadLineList(1);
+    }
+
+
+    private void loadLineList(int p) {
+        sGankIO.getLineList(p).filter(j -> j.getData() != null)
+                .map(json -> json.getData().getData())
+                .filter(this::filterJson)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(dGank -> {
+                    List<LineListData.LineListDetail> lineList = new ArrayList<>();
+                    lineList.addAll(dGank);
+                }, throwable -> loadError(throwable));
+    }
+
+    private Boolean filterJson(List<LineListData.LineListDetail> lineListDetails) {
+        return (lineListDetails.size() > 0);
     }
 
     private void loadData(boolean clean) {
@@ -55,7 +73,6 @@ public class GankActivity extends Activity {
                 .flatMap(Observable::from)
                 .toSortedList((meizhi1, meizhi2) ->
                         meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
-                .doOnNext(this::saveMeizhis)
                 .doOnNext(this::saveMeizhis)
                 .observeOn(AndroidSchedulers.mainThread())
                 .finallyDo(() -> toast("finally"))

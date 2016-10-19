@@ -20,11 +20,14 @@
 package org.niray.czndroid;
 
 import org.niray.czndroid.bean.GankData;
+import org.niray.czndroid.bean.LineListData;
 import org.niray.czndroid.bean.MeizhiData;
 import org.niray.czndroid.bean.VideoData;
 
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 // @formatter:off
@@ -46,5 +49,9 @@ public interface GankApi {
 
     @GET("/data/休息视频/" + DrakeetFactory.meizhiSize + "/{page}")
     Observable<VideoData> getVideoData(@Path("page") int page);
+
+    @Headers({"request-source: 3"})
+    @GET("/event/line/list?pagesize=3")
+    Observable<LineListData> getLineList(@Query("page") int page);
 
 }
