@@ -51,7 +51,6 @@ public class GankActivity extends Activity {
         loadLineList(1);
     }
 
-
     private void loadLineList(int p) {
         sGankIO.getLineList(p).filter(j -> j.getData() != null)
                 .map(json -> json.getData().getData())

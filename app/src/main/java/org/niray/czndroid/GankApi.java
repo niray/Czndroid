@@ -30,11 +30,6 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
-// @formatter:off
-
-/**
- * Created by drakeet on 8/9/15.
- */
 public interface GankApi {
 
     @GET("/data/福利/" + DrakeetFactory.meizhiSize + "/{page}")

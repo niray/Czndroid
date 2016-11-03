@@ -50,13 +50,36 @@ public class DrakeetRetrofit {
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint("https://api.huway.com")//http://gank.io/api
                 .setConverter(new GsonConverter(gson));
+
+
         RestAdapter gankRestAdapter = builder.build();
         //builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
         gankService = gankRestAdapter.create(GankApi.class);
     }
 
+//    public static OkHttpClient genericClient() {
+//        OkHttpClient httpClient = new OkHttpClient.Builder()
+//                .addInterceptor(new Interceptor() {
+//                    @Override
+//                    public Response intercept(Interceptor.Chain chain) throws IOException {
+//                        Request request = chain.request()
+//                                .newBuilder()
+//                                .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+//                                .addHeader("Accept-Encoding", "gzip, deflate")
+//                                .addHeader("Connection", "keep-alive")
+//                                .addHeader("Accept", "*/*")
+//                                .addHeader("Cookie", "add cookies here")
+//                                .build();
+//                        return chain.proceed(request);
+//                    }
+//
+//                })
+//                .build();
+//
+//        return httpClient;
+//    }
+
     public GankApi getGankService() {
         return gankService;
     }
-
 }
