@@ -21,13 +21,20 @@ package org.niray.czndroid;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.OkHttpClient;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+import okhttp3.Authenticator;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 2015-08-07T03:57:47.229Z
@@ -42,19 +49,59 @@ public class DrakeetRetrofit {
     final GankApi gankService;
 
     DrakeetRetrofit() {
-        OkHttpClient client = new OkHttpClient();
-        client.setReadTimeout(12, TimeUnit.SECONDS);
-
-        RestAdapter.Builder builder = new RestAdapter.Builder();
-        builder.setClient(new OkClient(client))
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint("https://api.huway.com")//http://gank.io/api
-                .setConverter(new GsonConverter(gson));
 
 
-        RestAdapter gankRestAdapter = builder.build();
+        Interceptor mTokenInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Interceptor.Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+//                if (Your.sToken == null || alreadyHasAuthorizationHeader(originalRequest)) {
+//                    return chain.proceed(originalRequest);
+//                }
+                Request authorised = originalRequest.newBuilder()
+                        .header("Authorization", "Your.sToken")
+                        .build();
+                return chain.proceed(authorised);
+            }
+        };
+
+        Authenticator mAuthenticator = new Authenticator() {
+            @Override
+            public Request authenticate(Route route, Response response) throws IOException {
+//                Your.sToken = service.refreshToken();
+                return response.request().newBuilder()
+                        .addHeader("Authorization", "newAccessToken")
+                        .build();
+            }
+        };
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .retryOnConnectionFailure(true)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .addNetworkInterceptor(mTokenInterceptor)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.huway.com")
+                .client(client)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        gankService = retrofit.create(GankApi.class);
+
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//        builder.baseUrl(new OkHttpClient(client))
+//                .setLogLevel(Retrofit.LogLevel.FULL)
+//                .setEndpoint("https://api.huway.com")//http://gank.io/api
+//                .setConverter(new GsonConverter(gson));
+//
+//        Retrofit gankRestAdapter = builder.build();
         //builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
-        gankService = gankRestAdapter.create(GankApi.class);
+
     }
 
 //    public static OkHttpClient genericClient() {

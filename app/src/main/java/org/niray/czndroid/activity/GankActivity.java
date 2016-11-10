@@ -34,8 +34,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class GankActivity extends Activity {
 
@@ -55,11 +57,26 @@ public class GankActivity extends Activity {
         sGankIO.getLineList(p).filter(j -> j.getData() != null)
                 .map(json -> json.getData().getData())
                 .filter(this::filterJson)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(dGank -> {
-                    List<LineListData.LineListDetail> lineList = new ArrayList<>();
-                    lineList.addAll(dGank);
-                }, throwable -> loadError(throwable));
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<List<LineListData.LineListDetail>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(List<LineListData.LineListDetail> lineListDetails) {
+                        List<LineListData.LineListDetail> lineList = new ArrayList<>();
+                        lineList.addAll(lineListDetails);
+                    }
+                });
+//                        (dGank -> {
+//                }, throwable -> loadError(throwable));
     }
 
     private Boolean filterJson(List<LineListData.LineListDetail> lineListDetails) {

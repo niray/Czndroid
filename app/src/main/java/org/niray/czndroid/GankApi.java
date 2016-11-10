@@ -24,10 +24,10 @@ import org.niray.czndroid.bean.LineListData;
 import org.niray.czndroid.bean.MeizhiData;
 import org.niray.czndroid.bean.VideoData;
 
-import retrofit.http.GET;
-import retrofit.http.Headers;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface GankApi {
