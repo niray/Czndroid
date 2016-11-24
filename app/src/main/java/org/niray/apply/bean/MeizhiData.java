@@ -17,21 +17,14 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean;
+package org.niray.apply.bean;
 
-import java.util.Date;
+import java.util.List;
 
 /**
- * Created by drakeet on 8/11/15.
+ * Created by drakeet on 8/9/15.
  */
-public class Gank {
+public class MeizhiData {
 
-    public String url;
-    public String type;
-    public String desc;
-    public String who;
-    public boolean used;
-    public Date createdAt;
-    public Date updatedAt;
-    public Date publishedAt;
+    public List<Meizhi> results;
 }

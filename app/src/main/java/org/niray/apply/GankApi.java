@@ -17,12 +17,12 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid;
+package org.niray.apply;
 
-import org.niray.czndroid.bean.GankData;
-import org.niray.czndroid.bean.LineListData;
-import org.niray.czndroid.bean.MeizhiData;
-import org.niray.czndroid.bean.VideoData;
+import org.niray.apply.bean.GankData;
+import org.niray.apply.bean.LineListData;
+import org.niray.apply.bean.MeizhiData;
+import org.niray.apply.bean.VideoData;
 
 import retrofit2.http.GET;
 import retrofit2.http.Headers;

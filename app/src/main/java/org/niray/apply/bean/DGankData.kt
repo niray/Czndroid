@@ -17,24 +17,14 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid;
+package org.niray.apply.bean
+
+import java.util.*
 
 /**
- * Created by drakeet on 8/9/15.
+ * Created by drakeet(http://drakeet.me)
+ * Date: 9/9/15 10:51
  */
-public class DrakeetFactory {
-
-    public static final int meizhiSize = 10;
-    protected static final Object monitor = new Object();
-    static GankApi sGankIOSingleton = null;
-
-    public static GankApi getGankIOSingleton() {
-        synchronized (monitor) {
-            if (sGankIOSingleton == null) {
-                sGankIOSingleton = new DrakeetRetrofit().getGankService();
-            }
-            return sGankIOSingleton;
-        }
-    }
-
+class DGankData {
+    var results: List<DGank> = ArrayList()
 }

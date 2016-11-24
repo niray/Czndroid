@@ -1,4 +1,4 @@
-package org.niray.czndroid.bean;
+package org.niray.apply.bean;
 
 /**
  * Created by Chen Zhining

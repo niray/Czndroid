@@ -17,18 +17,18 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.activity;
+package org.niray.apply.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import org.niray.czndroid.DrakeetFactory;
-import org.niray.czndroid.GankApi;
-import org.niray.czndroid.bean.LineListData;
-import org.niray.czndroid.bean.Meizhi;
-import org.niray.czndroid.bean.MeizhiData;
-import org.niray.czndroid.bean.VideoData;
+import org.niray.apply.DrakeetFactory;
+import org.niray.apply.GankApi;
+import org.niray.apply.bean.LineListData;
+import org.niray.apply.bean.Meizhi;
+import org.niray.apply.bean.MeizhiData;
+import org.niray.apply.bean.VideoData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class GankActivity extends Activity {
                 .filter(this::filterJson)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
+                //    .unsubscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<LineListData.LineListDetail>>() {
                     @Override
                     public void onCompleted() {

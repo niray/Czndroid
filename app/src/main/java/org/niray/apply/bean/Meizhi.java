@@ -17,14 +17,23 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean;
+package org.niray.apply.bean;
 
-import java.util.List;
+import java.util.Date;
 
 /**
- * Created by drakeet on 8/9/15.
+ * Created by drakeet on 6/20/15.
  */
-public class MeizhiData {
+public class Meizhi {
 
-    public List<Meizhi> results;
+    public String url;
+    public String type;
+    public String desc;
+    public String who;
+    public boolean used;
+    public Date createdAt;
+    public Date updatedAt;
+    public Date publishedAt;
+    public int imageWidth;
+    public int imageHeight;
 }

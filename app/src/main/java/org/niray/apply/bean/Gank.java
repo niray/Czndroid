@@ -17,14 +17,14 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean;
+package org.niray.apply.bean;
 
 import java.util.Date;
 
 /**
- * Created by drakeet on 6/20/15.
+ * Created by drakeet on 8/11/15.
  */
-public class Meizhi {
+public class Gank {
 
     public String url;
     public String type;
@@ -34,6 +34,4 @@ public class Meizhi {
     public Date createdAt;
     public Date updatedAt;
     public Date publishedAt;
-    public int imageWidth;
-    public int imageHeight;
 }

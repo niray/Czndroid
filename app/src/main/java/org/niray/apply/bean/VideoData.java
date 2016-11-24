@@ -17,23 +17,11 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean
+package org.niray.apply.bean;
 
-/**
- * Created by drakeet on 8/11/15.
- */
-class GankData() {
+import java.util.List;
 
-    var results: Result? = null
-    var category: List<String>? = null
+public class VideoData {
 
-    inner class Result {
-        var androidList: List<Gank>? = null
-        var 休息视频List: List<Gank>? = null
-        var iOSList: List<Gank>? = null
-        var 妹纸List: List<Gank>? = null
-        var 拓展资源List: List<Gank>? = null
-        var 瞎推荐List: List<Gank>? = null
-        var appList: List<Gank>? = null
-    }
+    public List<Gank> results;
 }

@@ -17,16 +17,23 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean
+package org.niray.apply.bean
 
 /**
- * Created by drakeet(http://drakeet.me)
- * Date: 9/9/15 11:00
+ * Created by drakeet on 8/11/15.
  */
-class DGank {
-    var preview: String? = null
-    var tag: String? = null
-    var createdAt: String? = null
-    var updatedAt: String? = null
-    var objectId: String? = null
+class GankData() {
+
+    var results: Result? = null
+    var category: List<String>? = null
+
+    inner class Result {
+        var androidList: List<Gank>? = null
+        var 休息视频List: List<Gank>? = null
+        var iOSList: List<Gank>? = null
+        var 妹纸List: List<Gank>? = null
+        var 拓展资源List: List<Gank>? = null
+        var 瞎推荐List: List<Gank>? = null
+        var appList: List<Gank>? = null
+    }
 }

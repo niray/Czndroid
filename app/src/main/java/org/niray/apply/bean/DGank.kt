@@ -17,14 +17,16 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid.bean
-
-import java.util.*
+package org.niray.apply.bean
 
 /**
  * Created by drakeet(http://drakeet.me)
- * Date: 9/9/15 10:51
+ * Date: 9/9/15 11:00
  */
-class DGankData {
-    var results: List<DGank> = ArrayList()
+class DGank {
+    var preview: String? = null
+    var tag: String? = null
+    var createdAt: String? = null
+    var updatedAt: String? = null
+    var objectId: String? = null
 }

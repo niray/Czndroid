@@ -1,4 +1,4 @@
-package org.niray.czndroid.activity
+package org.niray.apply.activity
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView

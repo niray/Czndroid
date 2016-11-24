@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.niray.czndroid;
+package org.niray.apply;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,7 +50,6 @@ public class DrakeetRetrofit {
 
     DrakeetRetrofit() {
 
-
         Interceptor mTokenInterceptor = new Interceptor() {
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {
@@ -58,9 +57,7 @@ public class DrakeetRetrofit {
 //                if (Your.sToken == null || alreadyHasAuthorizationHeader(originalRequest)) {
 //                    return chain.proceed(originalRequest);
 //                }
-                Request authorised = originalRequest.newBuilder()
-                        .header("Authorization", "Your.sToken")
-                        .build();
+                Request authorised = originalRequest.newBuilder().header("Authorization", "Your.sToken").build();
                 return chain.proceed(authorised);
             }
         };
@@ -69,9 +66,7 @@ public class DrakeetRetrofit {
             @Override
             public Request authenticate(Route route, Response response) throws IOException {
 //                Your.sToken = service.refreshToken();
-                return response.request().newBuilder()
-                        .addHeader("Authorization", "newAccessToken")
-                        .build();
+                return response.request().newBuilder().addHeader("Authorization", "newAccessToken").build();
             }
         };
 
